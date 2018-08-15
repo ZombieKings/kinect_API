@@ -1,9 +1,17 @@
-﻿# CMakeList.txt : 顶级 CMake 项目文件，执行全局配置
-# 和此处的包含子项目。
-#
+﻿
 cmake_minimum_required (VERSION 3.8)
 
-project ("Kinect_Accessor")
+project("Kinect_Accessor")
 
-# 包含子项目。
-add_subdirectory ("Kinect_Accessor")
+#Kinect
+include_directories("$ENV{KINECTSDK20_DIR}/inc")
+set(KINECT_LIB_DIR "$ENV{KINECTSDK20_DIR}/Lib/x86")
+link_libraries(
+"${KINECT_LIB_DIR}/Kinect20.Face.lib" 
+"${KINECT_LIB_DIR}/Kinect20.Fusion.lib" 
+"${KINECT_LIB_DIR}/Kinect20.lib" 
+"${KINECT_LIB_DIR}/Kinect20.VisualGestureBuilder.lib"
+)
+
+# 将源添加到此项目的可执行文件。
+add_executable (Kinect_Accessor "src/Kinect_Accessor.cpp" "src/Kinect_Accessor.h") 

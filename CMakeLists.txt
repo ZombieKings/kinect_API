@@ -14,4 +14,4 @@ link_libraries(
 )
 
 # 将源添加到此项目的可执行文件。
-add_executable (Kinect_Accessor "src/Kinect_Accessor.cpp" "src/Kinect_Accessor.h") 
+add_executable (kinect_accessor "src/kinect_accessor.cpp" "src/kinect_accessor.h") 

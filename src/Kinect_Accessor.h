@@ -22,7 +22,7 @@ inline void SafeRelease(Interface *& pInterfaceToRelease)
 
 using namespace std;
 
-class CBasic_Depth
+class CKinect_Accessor
 {
 	//Size of image
 	static const int cWidth = 512;
@@ -30,10 +30,10 @@ class CBasic_Depth
 
 public:
 	//Constructor
-	CBasic_Depth();
+	CKinect_Accessor();
 
 	//Destructor
-	~CBasic_Depth();
+	~CKinect_Accessor();
 
 private:
 

@@ -1,7 +1,7 @@
 ﻿#include "Kinect_Accessor.h"
 
 //Constructor
-CBasic_Depth::CBasic_Depth()
+CKinect_Accessor::CKinect_Accessor()
 {
 	m_pKinectSensor = nullptr;
 	m_pDepthReader = nullptr;
@@ -9,7 +9,7 @@ CBasic_Depth::CBasic_Depth()
 }
 
 //Distructor
-CBasic_Depth::~CBasic_Depth()
+CKinect_Accessor::~CKinect_Accessor()
 {
 	//clean points data
 	delete[] m_pCameraSpacePoint;
@@ -28,7 +28,7 @@ CBasic_Depth::~CBasic_Depth()
 }
 
 //Initialize the defualt sensor.
-HRESULT CBasic_Depth::InitializeSensor()
+HRESULT CKinect_Accessor::InitializeSensor()
 {
 	HRESULT hr;
 
@@ -73,7 +73,7 @@ HRESULT CBasic_Depth::InitializeSensor()
 //	nWidth:	Width of depth frame.
 //	nMinDepth: The minimum reliable depth of data.
 //	nMaxDepth: The maxmum reliable depth of data.
-void CBasic_Depth::ProcessDepth(UINT16* pBuffer, int nWidth, int nHeight, USHORT nMinDepth, USHORT nMaxDepth)
+void CKinect_Accessor::ProcessDepth(UINT16* pBuffer, int nWidth, int nHeight, USHORT nMinDepth, USHORT nMaxDepth)
 {
 	//check out the validity of data
 	if (pBuffer && (nWidth == cWidth) && (nHeight == cHeight))
@@ -94,7 +94,7 @@ void CBasic_Depth::ProcessDepth(UINT16* pBuffer, int nWidth, int nHeight, USHORT
 }
 
 // Get the latest depth frame data
-void CBasic_Depth::Update()
+void CKinect_Accessor::Update()
 {
 
 	if (!m_pDepthReader)
@@ -163,11 +163,11 @@ void CBasic_Depth::Update()
 
 }
 
-int CBasic_Depth::GetWidth()
+int CKinect_Accessor::GetWidth()
 {
 	return cWidth;
 }
-int CBasic_Depth::GetHeight()
+int CKinect_Accessor::GetHeight()
 {
 	return cHeight;
 }

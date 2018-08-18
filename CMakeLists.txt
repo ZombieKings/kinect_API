@@ -1,7 +1,7 @@
 ﻿
 cmake_minimum_required (VERSION 3.8)
 
-project("Kinect_Accessor")
+project("Kinect_API")
 
 #Kinect
 include_directories("$ENV{KINECTSDK20_DIR}/inc")
@@ -14,4 +14,4 @@ link_libraries(
 )
 
 # 将源添加到此项目的可执行文件。
-add_executable (kinect_accessor "src/kinect_accessor.cpp" "src/kinect_accessor.h") 
+add_executable (kinect_api "src/kinect_api.cpp" "src/kinect_api.h") 

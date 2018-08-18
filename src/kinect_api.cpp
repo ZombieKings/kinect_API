@@ -1,22 +1,32 @@
-﻿#include "Kinect_Accessor.h"
+﻿#include "kinect_api.h"
 
 //Constructor
-CKinect_Accessor::CKinect_Accessor()
+CKinect_API::CKinect_API()
 {
 	m_pKinectSensor = nullptr;
+	
+	m_pMultiSourceReader = nullptr;
+
 	m_pDepthReader = nullptr;
+	m_pColorReader = nullptr;
+	m_pInfraredReader = nullptr;
+
 	m_pCameraSpacePoint = nullptr;
 }
 
 //Distructor
-CKinect_Accessor::~CKinect_Accessor()
+CKinect_API::~CKinect_API()
 {
 	//clean points data
 	delete[] m_pCameraSpacePoint;
 	m_pCameraSpacePoint = nullptr;
 
-	//clean up depth frame reader
+	//clean up frame reader
 	SafeRelease(m_pDepthReader);
+	SafeRelease(m_pColorReader);
+	SafeRelease(m_pInfraredReader);
+
+	SafeRelease(m_pMultiSourceReader);
 
 	//close the Kinect Sensor
 	if (m_pKinectSensor)
@@ -28,7 +38,7 @@ CKinect_Accessor::~CKinect_Accessor()
 }
 
 //Initialize the defualt sensor.
-HRESULT CKinect_Accessor::InitializeSensor()
+HRESULT CKinect_API::InitializeSensor()
 {
 	HRESULT hr;
 
@@ -73,7 +83,7 @@ HRESULT CKinect_Accessor::InitializeSensor()
 //	nWidth:	Width of depth frame.
 //	nMinDepth: The minimum reliable depth of data.
 //	nMaxDepth: The maxmum reliable depth of data.
-void CKinect_Accessor::ProcessDepth(UINT16* pBuffer, int nWidth, int nHeight, USHORT nMinDepth, USHORT nMaxDepth)
+void CKinect_API::ProcessDepth(UINT16* pBuffer, int nWidth, int nHeight, USHORT nMinDepth, USHORT nMaxDepth)
 {
 	//check out the validity of data
 	if (pBuffer && (nWidth == cWidth) && (nHeight == cHeight))
@@ -93,8 +103,14 @@ void CKinect_Accessor::ProcessDepth(UINT16* pBuffer, int nWidth, int nHeight, US
 	}
 }
 
+//Get the main frame reader.
+HRESULT CKinect_API::GetMultiSuorceFrame()
+{
+
+}
+
 // Get the latest depth frame data
-void CKinect_Accessor::Update()
+void CKinect_API::GetDepthFrame()
 {
 
 	if (!m_pDepthReader)
@@ -162,12 +178,22 @@ void CKinect_Accessor::Update()
 
 
 }
+// Get the latest color frame data
+void CKinect_API::GetColorFrame()
+{
 
-int CKinect_Accessor::GetWidth()
+}
+// Get the latest infrared frame data
+void CKinect_API::GetInfraredFrame()
+{
+
+}
+
+int CKinect_API::GetWidth()
 {
 	return cWidth;
 }
-int CKinect_Accessor::GetHeight()
+int CKinect_API::GetHeight()
 {
 	return cHeight;
 }
